@@ -19,9 +19,12 @@ public class Driver {
                 case "init" :
                     System.out.println("setting up initiative \n");
                     break;
-                case "bard" :
-                    Bard b = new Bard();
-                    b.printClassName();
+                case "test" :
+                    Barbarian b = new Barbarian();
+                    b.showClassFeatures();
+
+                    Rogue rogue = new Rogue();
+                    rogue.showClassFeatures();
                     break;
                 default :
                     System.out.println("Invalid command. \n");

@@ -1,3 +1,4 @@
+@SuppressWarnings("unused")
 class Bard extends CharacterClass {
 
     Bard(){

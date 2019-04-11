@@ -50,25 +50,25 @@ public class Main {
         }
     }
 
-    public static void init(PC.Party p){
-        Scanner key = new Scanner(System.in);
-        boolean flag = true;
-
-        //PC.Party p = PC.getTheParty();
-        String[] l = p.getCharacterNames();
-
-        while(flag){
-            System.out.println("player _ initiative");
-            String r = key.next();
-            String[] parsed = r.split(" ");
-                if(Arrays.asList(p.getCharacterNames()).contains(parsed[0])){
-                    p.getPcList().get(Arrays.asList(p.getCharacterNames()).indexOf(parsed[0])).setRolledInitiative(Integer.parseInt(parsed[1]));
-                }else if(parsed[0].equals("q")){
-                    flag = false;
-                }
-
-        }
-    }
+//    public static void init(PC.Party p){
+//        Scanner key = new Scanner(System.in);
+//        boolean flag = true;
+//
+//        //PC.Party p = PC.getTheParty();
+//        String[] l = p.getCharacterNames();
+//
+//        while(flag){
+//            System.out.println("player _ initiative");
+//            String r = key.next();
+//            String[] parsed = r.split(" ");
+//                if(Arrays.asList(p.getCharacterNames()).contains(parsed[0])){
+//                    p.getPcList().get(Arrays.asList(p.getCharacterNames()).indexOf(parsed[0])).setRolledInitiative(Integer.parseInt(parsed[1]));
+//                }else if(parsed[0].equals("q")){
+//                    flag = false;
+//                }
+//
+//        }
+//    }
 
     public static void encounter1(PC.Party p){
 
