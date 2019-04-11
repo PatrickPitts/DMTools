@@ -1,6 +1,6 @@
-public class Bard extends CharacterClass {
+class Bard extends CharacterClass {
 
-    public Bard(){
+    Bard(){
         this.setClassName("Bard");
     }
 }

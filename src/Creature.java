@@ -1,3 +1,4 @@
+@SuppressWarnings("unused")
 public class Creature {
 
     private int[] stats = {10,10,10,10,10,10};

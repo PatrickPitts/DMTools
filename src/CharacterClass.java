@@ -1,12 +1,12 @@
-public class CharacterClass {
+class CharacterClass {
     private String className = "";
-    public CharacterClass(){
+    CharacterClass(){
         int classLevel = 1;
     }
-    public String getClassName(){return this.className;}
-    public void setClassName(String str){this.className = str;}
+    private String getClassName(){return this.className;}
+    void setClassName(String str){this.className = str;}
 
-    public void printClassName(){
+    void printClassName(){
         System.out.println(getClassName());
     }
 
