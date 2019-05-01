@@ -1,11 +1,17 @@
 @SuppressWarnings("unused")
 public class Creature {
 
+    Creature(){
+
+    }
+
     private int[] stats = {10,10,10,10,10,10};
 
     private int maxHP = 1;
     private int currentHP = 1;
     private String name;
+
+    private int rolledInitiative = 0;
 
     public void setStrength(int i){this.stats[0] = i;}
     public void setDexterity(int i){this.stats[1] = i;}
@@ -32,8 +38,12 @@ public class Creature {
     public int getStatModifier(int i){
         return (i - 10) / 2;
     }
+
+    public void setRolledInitiative(int i) {this.rolledInitiative = this.getStatModifier(this.getDexterity()) + i;}
     public int getRolledInitiative(int i) {
         return this.getStatModifier(this.getDexterity()) + i;
     }
+    public int getRolledInitiative() {return this.rolledInitiative; }
+
 
 }
