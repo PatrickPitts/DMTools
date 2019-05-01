@@ -14,7 +14,7 @@ public class AbbreviatedParty extends Frame {
         JFrame window = new JFrame(title);
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(750, 500);
+        //window.setSize(750, 500);
         window.setLayout(new GridBagLayout());
 
         JPanel leftPanel = new JPanel();
@@ -32,10 +32,12 @@ public class AbbreviatedParty extends Frame {
         MouseListener clickOnList = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                int indexOfSelected = playerList.getSelectedIndex();
                 if (e.getClickCount() == 2){
-
-                    int indexOfSelected = playerList.getSelectedIndex();
-                    BasicPCDisplayPanel.build(rightPanel, p.getPartyMembers().get(indexOfSelected));
+                    for(int i = 0; i < players.length; i++){
+                        BasicPCDisplayPanel.buildBasic(charPanels.get(i), p.getPartyMembers().get(i));
+                    }
+                    BasicPCDisplayPanel.buildHighlight(charPanels.get(indexOfSelected), p.getPartyMembers().get(indexOfSelected));
                 }
             }
         };
@@ -46,11 +48,20 @@ public class AbbreviatedParty extends Frame {
                 InitiativeSort.build(p);
             }
         };
+
+        ActionListener showChrSheet = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int indexOfSelected = playerList.getSelectedIndex();
+                CharacterSheet.buildShowSheet(p.getPartyMembers().get(indexOfSelected));
+            }
+        };
+
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
         JButton popoutInitiative = new JButton("Roll for Initiative!");
 
-        JButton backToPartiesButton = new JButton("Back to Party Select");
+        JButton showCharacterSheetButton = new JButton("Show Full Sheet");
 
 
         playerList.setAlignmentX(Component.TOP_ALIGNMENT);
@@ -58,13 +69,14 @@ public class AbbreviatedParty extends Frame {
 
         playerList.addMouseListener(clickOnList);
         popoutInitiative.addActionListener(rollInitiative);
+        showCharacterSheetButton.addActionListener(showChrSheet);
 
         geometry.anchor = GridBagConstraints.NORTH;
         leftPanel.add(playerList, geometry);
 
         geometry.anchor = GridBagConstraints.SOUTH;
         leftPanel.add(popoutInitiative, geometry);
-        leftPanel.add(backToPartiesButton, geometry);
+        leftPanel.add(showCharacterSheetButton, geometry);
 
         geometry.insets = new Insets(3,3,3,3);
         for(int i = 0; i < p.getPartyMembers().size(); i++){
@@ -80,6 +92,9 @@ public class AbbreviatedParty extends Frame {
 
         window.add(leftPanel);
         window.add(rightPanel);
+
+        Dimension windowSize = new Dimension((int) window.getPreferredSize().getWidth()+25, (int) window.getPreferredSize().getHeight() + 75);
+        window.setSize(windowSize);
 
         window.setVisible(true);
         window.revalidate();

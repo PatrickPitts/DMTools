@@ -98,16 +98,13 @@ public class InitiativeSort {
         geometry.gridy++;
         geometry.gridx = 0;
         return sortPanel;
-
-
     }
-
 
     public static ArrayList<Creature> sort(ArrayList<Creature> players){
         ArrayList<Creature> newArr = new ArrayList<Creature>(players);
         for(int i = 0; i< newArr.size(); i++){
             int bonus = (addBonus.get(i).isSelected()) ? 1 : 0;
-            int val = Integer.parseInt(rolls.get(i).getText()) + newArr.get(i).getDexterity() * bonus;
+            int val = Integer.parseInt(rolls.get(i).getText()) + newArr.get(i).getDexMod() * bonus;
             newArr.get(i).setRolledInitiative(val);
         }
 
@@ -132,7 +129,7 @@ public class InitiativeSort {
             returnArr.add(newArr.get(i));
         }
 
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n-1; i++){
             if(returnArr.get(i+1).getDexterity() > returnArr.get(i).getDexterity()){
                 Collections.swap(returnArr, i, i+1);
             }

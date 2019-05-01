@@ -302,8 +302,10 @@ public class AddCharacterWindow {
         for(int i = 1, j = 0; j < 6; i += 2, j++){
             geometry.gridy = 0;
             geometry.gridx = i;
+            geometry.anchor = GridBagConstraints.LINE_END;
             statsPanel.add(GUIBuilder.labelGenSolid(chckLabels[j]+":", GUIBuilder.MAIN_FONT), geometry);
 
+            geometry.anchor = GridBagConstraints.CENTER;
             geometry.gridx = i+1;
             statsPanel.add(comboBoxArrayList.get(j), geometry);
 

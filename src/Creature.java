@@ -27,6 +27,13 @@ public class Creature {
     public int getWisdom(){return this.stats[4];}
     public int getCharisma(){return this.stats[5];}
 
+    public int getStrMod(){return (this.stats[0] - 10) / 2;}
+    public int getDexMod(){return (this.stats[1] - 10) / 2;}
+    public int getConMod(){return (this.stats[2] - 10) / 2;}
+    public int getIntMod(){return (this.stats[3] - 10) / 2;}
+    public int getWisMod(){return (this.stats[4] - 10) / 2;}
+    public int getChaMod(){return (this.stats[5] - 10) / 2;}
+
     public void setMaxHP(int maxHP) {this.maxHP = maxHP;}
     public void setCurrentHP(int currentHP) {this.currentHP = currentHP;}
     public void setName(String str){this.name = str;}
