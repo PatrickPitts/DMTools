@@ -13,6 +13,7 @@ public class Wizard extends CharacterClass {
         this.addSubclassChoice("Illusion");
         this.addSubclassChoice("Necromancy");
         this.addSubclassChoice("Transmutation");
+        this.setHitDieValue(6);
 
         classFeatures.put(1, new ArrayList<>(List.of("Spellcasting", "Arcane Recovery") ) );
         classFeatures.put(3, new ArrayList<>(List.of() ) );

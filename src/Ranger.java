@@ -7,6 +7,7 @@ public class Ranger extends CharacterClass {
         this.setClassName("Ranger");
         this.addSubclassChoice("Hunter");
         this.addSubclassChoice("Beast Master");
+        this.setHitDieValue(10);
 
         classFeatures.put(1, new ArrayList<>(List.of("Favored Enemy", "Natural Explorer") ) );
         classFeatures.put(2, new ArrayList<>(List.of("Fighting Style", "Spellcasting") ) );

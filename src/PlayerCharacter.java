@@ -28,6 +28,7 @@ public class PlayerCharacter extends Creature {
     private int[] currency = new int[]{0, 0, 0, 0, 0};
     private String race = "";
     private String partyName;
+    private String backstory;
 
     //Basic Setter Methods
     public void setPlayerName(String playerName) {
@@ -62,6 +63,7 @@ public class PlayerCharacter extends Creature {
     public void setCurrency(int[] currency) {this.currency = currency;}
     public void setRace(String race) {this.race = race;}
     public void setPartyName(String partyName) {this.partyName = partyName;}
+    public void setBackstory(String backstory) {this.backstory = backstory;}
 
 
     //Basic Getter Methods
@@ -84,7 +86,12 @@ public class PlayerCharacter extends Creature {
     public String getBackground() {return background;}
     public String getAlignment() {return alignment;}
     public int getExperiencePoints() {return experiencePoints;}
-    public int getSpeed() {return speed;}
+    //FIXME Speed depends on race, and will be updated when Race objects are implemented
+
+    public int getSpeed() {
+        String[] slow = new String[]{"Dwarf", "Halfling"};//25
+        String[] fast = new String[]{"Elf", };//30
+        return speed;}
     public int getHitPoints() {return hitPoints;}
     public int getCurrentHitPoints() {return currentHitPoints;}
     public int getTemporaryHitPoints() {return temporaryHitPoints;}
@@ -98,8 +105,7 @@ public class PlayerCharacter extends Creature {
     public String getRace() {return race;}
     public ArrayList<String> getAbilities() {return abilities;}
     public String getPartyName() {return partyName;}
-
-
+    public String getBackstory() {return backstory;}
     //Data-as-String Getter Methods
 
     public String getProficienciesString(){
@@ -140,8 +146,10 @@ public class PlayerCharacter extends Creature {
         for(int i = 0; i < mods.length; i++){
             val = (getAbilityScores()[i]-10)/2;
 
-            if(val > 0){
+            if(val > 0) {
                 mods[i] = "+" + val;
+            }else if (val == 0){
+                mods[i] = "  " + val;
             } else {
                 mods[i] = "" + val;
             }
@@ -162,6 +170,8 @@ public class PlayerCharacter extends Creature {
             val = getAbilityMods()[i] + getSavingThrowsProficiency()[i]*getProficiencyBonus();
             if(val > 0){
                 mods[i] = "+" + val;
+            }else if (val == 0){
+                mods[i] = "  " + val;
             } else {
                 mods[i] = "" + val;
             }
@@ -169,6 +179,21 @@ public class PlayerCharacter extends Creature {
         return mods;
     }
 
+    public String[] getSkillsAsStrings(){
+        String[] mods = new String[18];
+        int[] abilityAsc = new int[]{2,4,3,0,5,3,4,5,3,4,3,4,5,5,3,1,1,4};
+        for(int i = 0; i < abilityAsc.length; i++){
+            int val = getSkillProficiency()[i]*getProficiencyBonus() + getStatModifier(getAbilityScores()[abilityAsc[i]]);
+            if(val > 0){
+                mods[i] = "+" + val;
+            } else if (val == 0){
+                mods[i] = "  " + val;
+            } else {
+                mods[i] = "" + val;
+            }
+        }
+        return mods;
+    }
     public String getCurrencyString() {
         String str = "";
         int[] cur = this.getCurrency();
@@ -223,6 +248,7 @@ public class PlayerCharacter extends Creature {
         5 --> SkillProficiencies, 6 --> Background, 7 --> Alignment, 8 --> EXP, 9 --> Speed, 10 --> MaxHP,
         11 --> CurrentHP, 12 --> TempHP, 13 --> Personality, 14 --> Ideals, 15 --> Bonds, 16 --> Flaws,
         17 --> OtherProficiencies, 18 --> Equipment, 19 --> ListOfAbilities, 20 --> Currency, 21 --> Classes
+        22 --> Race, 23 --> Party name, 24 --> backstory
         */
         String[] values = str.split(Del.MAIN_DEL);
 
@@ -330,6 +356,7 @@ public class PlayerCharacter extends Creature {
         }
         this.setRace(values[22]);
         this.setPartyName(values[23]);
+        this.setBackstory(values[24]);
     }
 
     public void printAllFields(){
@@ -403,4 +430,9 @@ public class PlayerCharacter extends Creature {
     public String getPlayerName(){
         return playerName;
     }
+
+    public int getOtherACMods(){
+        return 0;
+    }
+
 }

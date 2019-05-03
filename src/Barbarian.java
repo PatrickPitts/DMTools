@@ -10,7 +10,7 @@ public class Barbarian  extends CharacterClass{
         this.setClassName("Barbarian");
         this.addSubclassChoice("Path of the Berserker");
         this.addSubclassChoice("Path of the Totem Warrior");
-
+        this.setHitDieValue(12);
         // Populates the classFeatures Map for Barbarian class features
 
 

@@ -8,6 +8,7 @@ public class Monk extends CharacterClass {
         this.addSubclassChoice("Way of the Open Hand");
         this.addSubclassChoice("Way of Shadow");
         this.addSubclassChoice("Way of the Four Elements");
+        this.setHitDieValue(8);
 
 
         classFeatures.put(1, new ArrayList<>(List.of("Unarmored Defense", "Martial Arts") ) );

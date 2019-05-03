@@ -141,6 +141,7 @@ public class AddCharacterWindow {
         for(int i = 0; i < 5; i++){
             textAreaArrayList.add(new JTextArea(3, 20));
             textAreaArrayList.get(i).setLineWrap(true);
+            textAreaArrayList.get(i).setWrapStyleWord(true);
         }
         textAreaArrayList.get(4).setColumns(40);
         textAreaArrayList.get(4).setRows(10);
@@ -488,7 +489,7 @@ public class AddCharacterWindow {
         stringsToAdd[4] = savesToSave.toString();
 
         StringBuilder skillsToSave = new StringBuilder();
-        for(int i = 6; i < 22; i++){
+        for(int i = 6; i < 24; i++){
             String k = (checkBoxArrayList.get(i).isSelected()) ? "1" : "0";
             skillsToSave.append(k).append(",");
         }
@@ -521,8 +522,7 @@ public class AddCharacterWindow {
         }
         stringsToAdd[12] = "0";
 
-        //iterates through textAreaArrayList, and saves character background stuff
-        //FIXME Never implements Backstory JTextArea. Must make adjustments to PlayerCharacter class first.
+
         for(int i = 13, j = 0; i <= 16; i++, j++){
             stringsToAdd[i] = textAreaArrayList.get(j).getText();
         }
@@ -554,6 +554,8 @@ public class AddCharacterWindow {
         } else {
             stringsToAdd[23] = Objects.requireNonNull(comboBoxArrayList.get(11).getSelectedItem()).toString();
         }
+
+        stringsToAdd[24] = textAreaArrayList.get(4).getText();
         PlayerCharacter pc = new PlayerCharacter(String.join(Del.MAIN_DEL, stringsToAdd));
         p.addPartyMember(pc);
         Main.setP(p);

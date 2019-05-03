@@ -28,6 +28,7 @@ public class AbbreviatedParty extends Frame {
 
         String[] players = p.getPartyMemberNames();
         JList<String> playerList = new JList<>(players);
+        playerList.setSelectedIndex(0);
 
         MouseListener clickOnList = new MouseAdapter() {
             @Override

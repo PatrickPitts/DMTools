@@ -12,6 +12,7 @@ class Bard extends CharacterClass {
         this.setClassName("Bard");
         this.addSubclassChoice("College of Lore");
         this.addSubclassChoice("College of Valor");
+        this.setHitDieValue(8);
 
         classFeatures.put(1, new ArrayList<>(List.of("Bardic Inspiration", "Spellcasting") ) );
         classFeatures.put(2, new ArrayList<>(List.of("Jack of All Trades", "Song of Rest") ) );

@@ -8,6 +8,7 @@ public class Warlock extends CharacterClass {
         this.addSubclassChoice("The Archfey");
         this.addSubclassChoice("The Great Old One");
         this.addSubclassChoice("The Fiend");
+        this.setHitDieValue(8);
 
 
         classFeatures.put(2, new ArrayList<>(List.of("Eldritch Invocations") ) );

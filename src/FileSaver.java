@@ -31,7 +31,8 @@ public class FileSaver{
         toSave += "10,20,30,40,50" + Del.MAIN_DEL;//Money
         toSave += "Barbarian~Path of the Totem Warrior~5" + Del.MAIN_DEL;//Classes
         toSave += "Dwarf"+Del.MAIN_DEL; //Race
-        toSave += "None" + Del.MAIN_DEL;
+        toSave += "Test" + Del.MAIN_DEL; // Party
+        toSave += "Chosen one, or some other such BS.";
 
         toSave += Del.CHAR_DEL;
 
@@ -58,7 +59,9 @@ public class FileSaver{
         toSave += "10,20,30,40,50" + Del.MAIN_DEL;//Money
         toSave += "Cleric~Divine Domain of Knowledge~10" + Del.MAIN_DEL;//Classes
         toSave += "Elf" + Del.MAIN_DEL; //Race
-        toSave += "Butts";//Party
+        toSave += "Test" + Del.MAIN_DEL; //Party
+        toSave += "Something horribly tragic, I'm sure.";
+
 
         System.out.println(toSave);
 

@@ -8,6 +8,7 @@ public class Fighter extends CharacterClass {
         this.addSubclassChoice("Champion");
         this.addSubclassChoice("Battle Master");
         this.addSubclassChoice("Eldritch Knight");
+        this.setHitDieValue(10);
 
         classFeatures.put(1, new ArrayList<>(List.of("Fighting Style", "Second Wind") ) );
         classFeatures.put(2, new ArrayList<>(List.of("Action Surge") ) );

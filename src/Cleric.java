@@ -5,14 +5,6 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 public class Cleric extends CharacterClass {
-    Map<Integer, ArrayList<String>> DDKnowledge = new HashMap<>();
-    Map<Integer, ArrayList<String>> DDLife = new HashMap<>();
-    Map<Integer, ArrayList<String>> DDLight = new HashMap<>();
-    Map<Integer, ArrayList<String>> DDNature = new HashMap<>();
-    Map<Integer, ArrayList<String>> DDTempest = new HashMap<>();
-    Map<Integer, ArrayList<String>> DDTrickery = new HashMap<>();
-    Map<Integer, ArrayList<String>> DDWar = new HashMap<>();
-
 
     Cleric() {
         this.setClassName("Cleric");
@@ -23,6 +15,7 @@ public class Cleric extends CharacterClass {
         this.addSubclassChoice("Divine Domain of Tempest");
         this.addSubclassChoice("Divine Domain of Trickery");
         this.addSubclassChoice("Divine Domain of War");
+        this.setHitDieValue(8);
 
         classFeatures.put(3, new ArrayList<>(List.of() ) );
         classFeatures.put(4, new ArrayList<>(List.of("Ability Score Improvement") ) );

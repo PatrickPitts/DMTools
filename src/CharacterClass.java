@@ -4,9 +4,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
 
-@SuppressWarnings("unused")
 class CharacterClass {
-    Scanner scnr = new Scanner(System.in);
     //stores all subclass options for the class, populated in classes than inherit from this
     private ArrayList<String> subclassChoices = new ArrayList<>();
 
@@ -17,6 +15,7 @@ class CharacterClass {
     private String className = "";
     private String subClassName;
     private int classLevel;
+    private int hitDieValue;
 
     CharacterClass(){
         classLevel = 1;
@@ -25,33 +24,25 @@ class CharacterClass {
 
     void setSubclassName(String str){this.subClassName = str;}
     void setClassName(String str){this.className = str;}
+    void setClassLevel(int n){
+        this.classLevel = n;
+    }
+    void setHitDieValue(int n) {this.hitDieValue = n;}
+
+    String getSubClassName(){
+        return this.subClassName;
+    }
+    String getClassName(){return this.className;}
+    int getClassLevel(){
+        return this.classLevel;
+    }
+    int getHitDieValue(){return this.hitDieValue; }
 
     void addSubclassChoice(String str){
         this.subclassChoices.add(str);
     }
-    String getClassName(){return this.className;}
+
     public ArrayList<String> getSubclassChoices(){return this.subclassChoices;}
-
-    void printClassName(){
-        System.out.println(getClassName());
-    }
-
-
-    void setClassLevel(int n){
-        classLevel = n;
-    }
-    int getClassLevel(){
-        return classLevel;
-    }
-    String getSubClassName(){
-        return this.subClassName;
-    }
-    void printSubClasses() {
-
-        for(String str : subclassChoices){
-            System.out.println(str);
-        }
-    }
 
     String getClassString(){
         return this.getClassName()+"~"+this.getSubClassName()+"~"+this.getClassLevel();
@@ -71,9 +62,7 @@ class CharacterClass {
     public ArrayList<String> getClassFeatures(){
         ArrayList<String> featuresAlist = new ArrayList<>();
         for(int i = 1; i < this.getClassLevel(); i++){
-            for(String f : classFeatures.get(i)){
-                featuresAlist.add(f);
-            }
+            featuresAlist.addAll(classFeatures.get(i));
         }
         return featuresAlist;
     }

@@ -7,6 +7,7 @@ public class Druid extends CharacterClass {
         this.setClassName("Druid");
         this.addSubclassChoice("Circle of the Land");
         this.addSubclassChoice("Circle of the Moon");
+        this.setHitDieValue(8);
 
         classFeatures.put(1, new ArrayList<>(List.of("Druidic", "Spellcasting") ) );
         classFeatures.put(2, new ArrayList<>(List.of("Wild Shape", "Druid Circle") ) );

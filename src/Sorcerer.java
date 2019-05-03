@@ -7,6 +7,7 @@ public class Sorcerer extends CharacterClass {
         this.setClassName("Sorcerer");
         this.addSubclassChoice("Draconic Bloodline");
         this.addSubclassChoice("Wild Magic");
+        this.setHitDieValue(6);
 
         classFeatures.put(2, new ArrayList<>(List.of("Font of Magic") ) );
         classFeatures.put(3, new ArrayList<>(List.of("Metamagic") ) );

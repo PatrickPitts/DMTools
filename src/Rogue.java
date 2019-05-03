@@ -11,6 +11,7 @@ public class Rogue extends CharacterClass {
         this.addSubclassChoice("Thief");
         this.addSubclassChoice("Assassin");
         this.addSubclassChoice("Arcane Trickster");
+        this.setHitDieValue(8);
 
         classFeatures.put(1, new ArrayList<>(List.of("Expertise", "Sneak Attack", "Thieve's Cant") ) );
         classFeatures.put(2, new ArrayList<>(List.of("Cunning Action") ) );

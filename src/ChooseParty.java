@@ -34,6 +34,7 @@ public class ChooseParty{
         }
         partyJList = new JList(partyNameArray.toArray());
         partyJList.setFont(GUIBuilder.MAIN_FONT);
+        partyJList.setSelectedIndex(0);
 
         //ActionListeners used in the pane
         ActionListener loadParty = e -> {

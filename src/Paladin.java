@@ -8,6 +8,7 @@ public class Paladin extends CharacterClass{
         this.addSubclassChoice("Oath of Devotion");
         this.addSubclassChoice("Oath of the Ancients");
         this.addSubclassChoice("Oath of Vengeance");
+        this.setHitDieValue(10);
 
 
         classFeatures.put(1, new ArrayList<>(List.of("Divine Sense", "Lay on Hands")) );
