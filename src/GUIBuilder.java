@@ -48,4 +48,22 @@ public class GUIBuilder {
 
         return t;
     }
+
+    public static JPanel textFieldwithSubscript(String textFieldString, String subscriptString, Font f){
+        JPanel ret = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
+        ret.setLayout(new GridBagLayout());
+
+        JTextField t = new JTextField(textFieldString);
+        t.setFont(f);
+
+        c.gridx = 0; c.gridy = 0;
+        ret.add(t, f);
+
+        c.gridy = 1;
+        ret.add(GUIBuilder.labelGenSolid(subscriptString, GUIBuilder.SUB_FONT), c);
+
+        return ret;
+
+    }
 }

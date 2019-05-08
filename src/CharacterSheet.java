@@ -1,11 +1,10 @@
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.spi.AbstractResourceBundleProvider;
 
 public class CharacterSheet {
 
@@ -13,7 +12,10 @@ public class CharacterSheet {
     private static ArrayList<JCheckBox> saveBoxes = new ArrayList<>();
     private static ArrayList<JCheckBox> skillBoxes = new ArrayList<>();
     private static ArrayList<JTextArea> personalityAreas = new ArrayList<>();
-    private static CompoundBorder cBorder = new CompoundBorder(new EmptyBorder(5,5,5,5), BorderFactory.createLineBorder(Color.BLACK));
+
+    // 0 --> AC, 1 --> Init, 2 --> Speed, 3 --> Current HP
+    private static ArrayList<JTextField> combatFields = new ArrayList<>();
+    private static ArrayList<JTextField> headerFields = new ArrayList<>();
 
     private static String[] skillTags  = new String[]{"Acrobatics", "Animal Handling",
             "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation",
@@ -22,16 +24,33 @@ public class CharacterSheet {
     private static String[] abilityTags = new String[]{"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
     private static String[] personalityTags = new String[]{"Personality Traits", "Ideals", "Bonds", "Flaws"};
 
-    public static void buildShowSheet(PlayerCharacter p){
+    private static void resetFields(){
+        saveBoxes.clear();
+        skillBoxes.clear();
+        personalityAreas.clear();
+        combatFields.clear();
+        headerFields.clear();
+    }
+
+    CharacterSheet(){}
+
+    public void buildShowSheet(PlayerCharacter p){
+
+        geometry.gridx = 0; geometry.gridy = 0; geometry.gridwidth = 1; geometry.gridheight = 0;
         JFrame window = new JFrame(p.getName());
+        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 
         JPanel canvas = new JPanel();
+        JPanel glass = new JPanel();
+
+        glass.setOpaque(false);
 
         JPanel topPanel = buildTopPanel(p);
         JPanel abilitiesPanel = buildAbilitiesPanel(p);
         JPanel savesPanel = buildSavesPanel(p);
         JPanel skillPanel = buildSkillsPanel(p);
-        JPanel combatPanel = new JPanel();
+        JPanel combatPanel = buildCombatPanel(p);
         JPanel personalityPanel = buildPersonalityPanel(p);
         JPanel otherProfPanel = new JPanel();
         JPanel equipmentPanel = new JPanel();
@@ -39,30 +58,27 @@ public class CharacterSheet {
 
         window.setLayout(new GridBagLayout());
         canvas.setLayout(new GridBagLayout());
-        //topPanel.setLayout(new GridBagLayout());
-//        abilitiesPanel.setLayout(new GridBagLayout());
-//        savesPanel.setLayout(new GridBagLayout());
-//        skillPanel.setLayout(new GridBagLayout());
-//        combatPanel.setLayout(new GridBagLayout());
-//        personalityPanel.setLayout(new GridBagLayout());
-//        otherProfPanel.setLayout(new GridBagLayout());
-//        equipmentPanel.setLayout(new GridBagLayout());
-//        featuresPanel.setLayout(new GridBagLayout());
 
+        JButton glassButton = new JButton("Edit Character...");
+
+        geometry.ipady = 5; geometry.ipadx = 5;
         geometry.gridx=0; geometry.gridy = 0; geometry.gridwidth = 6;
-        canvas.add(topPanel, geometry);
+        //canvas.add(topPanel, geometry);
 
         geometry.gridy = 1; geometry.gridheight = 4; geometry.gridwidth = 1;
         canvas.add(abilitiesPanel, geometry);
 
         geometry.gridx = 1; geometry.gridheight = 1;
-        canvas.add(savesPanel, geometry);
+        //canvas.add(savesPanel, geometry);
 
         geometry.gridy = 2;
-        canvas.add(skillPanel, geometry);
+        //canvas.add(skillPanel, geometry);
+
+        geometry.gridx = 2; geometry.gridy = 1;
+        //canvas.add(combatPanel, geometry);
 
         geometry.gridx = 4; geometry.gridy = 1; geometry.gridheight = 4;
-        canvas.add(personalityPanel, geometry);
+        //canvas.add(personalityPanel, geometry);
 
         geometry.gridx = 0; geometry.gridy = 0;
         window.add(canvas);
@@ -70,8 +86,11 @@ public class CharacterSheet {
         Dimension windowSize = window.getPreferredSize();
         window.setSize((int) (windowSize.getWidth() + 25), (int) (windowSize.getHeight() + 50));
 
-        //JPanel glass = buildGlass();
 
+        //deals with the glass pane, which will prevent the user from interacting with the UI directly
+        //FIXME Deal with interacting with glass pane after its finished being built
+        //glass.add(glassButton);
+        window.setGlassPane(glass);
         window.getGlassPane().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -98,6 +117,8 @@ public class CharacterSheet {
                 e.consume();
             }
         });
+
+
         window.getGlassPane().setVisible(true);
 
 
@@ -105,22 +126,8 @@ public class CharacterSheet {
         window.revalidate();
         window.setVisible(true);
     }
-    private static JPanel buildGlass(){
-        JPanel ret = new JPanel();
-        ret.setLayout(new GridBagLayout());
 
-        ret.setOpaque(true);
-        ret.addMouseListener(new MouseAdapter(){
-            public void mousePressed(MouseEvent me)
-            {
-                me.consume();
-            }
-        });
-        ret.setVisible(true);
-        return ret;
-    }
-
-    private static JPanel buildTopPanel(PlayerCharacter p){
+    private JPanel buildTopPanel(PlayerCharacter p){
         JPanel ret = new JPanel();
         ret.setLayout(new GridBagLayout());
 
@@ -187,7 +194,7 @@ public class CharacterSheet {
         return ret;
     }
 
-    private static JPanel buildAbilitiesPanel(PlayerCharacter p){
+    private JPanel buildAbilitiesPanel(PlayerCharacter p){
 
         JPanel ret = new JPanel();
         ret.setLayout(new GridBagLayout());
@@ -213,7 +220,7 @@ public class CharacterSheet {
             geometry.gridy++;
             abilityPanels.get(i).add(GUIBuilder.labelGenSubtle(Integer.toString(p.getAbilityScores()[i]), GUIBuilder.MAIN_FONT), geometry);
 
-            abilityPanels.get(i).setBorder(cBorder);
+            abilityPanels.get(i).setBorder(GUIBuilder.bufferBoarder);
 
             if(abilityPanels.get(i).getPreferredSize().width > maxBoxWidth){
                 maxBoxWidth = abilityPanels.get(i).getPreferredSize().width;
@@ -228,13 +235,12 @@ public class CharacterSheet {
         return ret;
     }
 
-    private static JPanel buildSavesPanel(PlayerCharacter p){
-        UIManager.getDefaults().put("Checkbox.disabledText", Color.BLACK);
-
-
+    private JPanel buildSavesPanel(PlayerCharacter p){
         JPanel ret = new JPanel();
         JPanel inspirationPanel = new JPanel();
         JPanel profPanel = new JPanel();
+
+        saveBoxes.clear();
 
         ret.setLayout(new GridBagLayout());
         inspirationPanel.setLayout(new GridBagLayout());
@@ -272,11 +278,11 @@ public class CharacterSheet {
         return ret;
     }
 
-    private static JPanel buildSkillsPanel(PlayerCharacter p){
+    private JPanel buildSkillsPanel(PlayerCharacter p){
         JPanel ret = new JPanel();
         ret.setLayout(new GridBagLayout());
 
-
+        skillBoxes.clear();
 
         for(int i = 0; i < skillTags.length; i++){
             geometry.gridy = i;
@@ -288,19 +294,80 @@ public class CharacterSheet {
         return ret;
     }
 
-    private static JPanel buildCombatPanel(PlayerCharacter p){
+    private JPanel buildCombatPanel(PlayerCharacter p){
         JPanel ret = new JPanel();
         ret.setLayout(new GridBagLayout());
-        int ac = 10 + p.getDexMod() + p.getOtherACMods();
 
+        String[] combatLabels = new String[]{"Armor Class", "Initiative", "Speed", "Hit Points", "Temporary HP"};
+        String[] fieldData = new String[]{Integer.toString(p.getArmorClass() + p.getOtherACMods()),
+                " " + p.getInitiativeMod(), " " + p.getSpeed()};
+        JPanel[] panels = new JPanel[]{new JPanel(), new JPanel(), new JPanel(), new JPanel(), new JPanel()};
+        for(JPanel j : panels){
+            j.setLayout(new GridBagLayout());
+        }
+        combatFields.clear();
+
+        geometry.anchor = GridBagConstraints.CENTER;
+
+        for(int i = 0; i < 3; i++){
+            geometry.gridx = i; geometry.gridy = 0;
+
+            combatFields.add(new JTextField());
+            combatFields.get(i).setText(fieldData[i]);
+            combatFields.get(i).setFont(GUIBuilder.LARGE_FONT);
+
+            panels[i].add(combatFields.get(i), geometry);
+            geometry.gridy++;
+            panels[i].add(GUIBuilder.labelGenSolid(combatLabels[i], GUIBuilder.SUB_FONT), geometry);
+            panels[i].setBorder(GUIBuilder.bufferBoarder);
+
+            geometry.gridx = i; geometry.gridy = 0;
+            ret.add(panels[i], geometry);
+        }
+        ret.setBorder(GUIBuilder.bufferBoarder);
+
+        int width = ret.getPreferredSize().width;
+
+        //builds HP Panel
+        combatFields.add(new JTextField());
+        combatFields.get(3).setText(""+p.getCurrentHP());
+        combatFields.get(3).setFont(GUIBuilder.LARGE_FONT);
+        geometry.gridx = 0; geometry.gridy = 0;
+        panels[3].setPreferredSize(new Dimension(width, panels[3].getPreferredSize().height));
+        panels[3].setBorder(GUIBuilder.bufferBoarder);
+        panels[3].add(combatFields.get(3));
+        geometry.gridx++;
+        panels[3].add(GUIBuilder.labelGenSolid((" / " + p.getMaxHP()), GUIBuilder.LARGE_FONT), geometry);
+        geometry.gridx = 0; geometry.gridy = 1; geometry.gridwidth = 2;
+        panels[3].add(GUIBuilder.labelGenSolid(combatLabels[3], GUIBuilder.SUB_FONT), geometry);
+
+        //builds Temp HP Panel
+        combatFields.add(new JTextField());
+        combatFields.get(4).setText(""+p.getTemporaryHitPoints());
+        combatFields.get(4).setFont(GUIBuilder.LARGE_FONT);
+        geometry.gridx = 0; geometry.gridy = 0; geometry.gridwidth = 1;
+        panels[4].setPreferredSize(new Dimension(width, panels[4].getPreferredSize().height));
+        panels[4].setBorder(GUIBuilder.bufferBoarder);
+        panels[4].add(combatFields.get(4));
+        geometry.gridx = 0; geometry.gridy = 1;
+        panels[4].add(GUIBuilder.labelGenSolid(combatLabels[4], GUIBuilder.SUB_FONT), geometry);
+
+
+        geometry.gridx=0; geometry.gridy = 1; geometry.gridwidth = 3;
+        ret.add(panels[3], geometry);
+        geometry.gridy++;
+        ret.add(panels[4], geometry);
+        geometry.gridwidth = 1;
 
         return ret;
     }
 
-    private static JPanel buildPersonalityPanel(PlayerCharacter p){
+    private JPanel buildPersonalityPanel(PlayerCharacter p){
 
         JPanel ret = new JPanel();
         ret.setLayout(new GridBagLayout());
+
+        personalityAreas.clear();
 
         geometry.anchor = GridBagConstraints.CENTER;
         geometry.gridx = 0; geometry.gridy = 0;

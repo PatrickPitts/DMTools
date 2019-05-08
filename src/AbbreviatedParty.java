@@ -54,7 +54,10 @@ public class AbbreviatedParty extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int indexOfSelected = playerList.getSelectedIndex();
-                CharacterSheet.buildShowSheet(p.getPartyMembers().get(indexOfSelected));
+
+                //CharacterSheetWindow.buildShowPanel(p.getPartyMembers().get(indexOfSelected));
+                CharacterSheet c = new CharacterSheet();
+                c.buildShowSheet(p.getPartyMembers().get(indexOfSelected));
             }
         };
 
@@ -88,8 +91,6 @@ public class AbbreviatedParty extends Frame {
             BasicPCDisplayPanel.buildBasic(charPanels.get(i), p.getPartyMembers().get(i));
             rightPanel.add(charPanels.get(i), geometry);
         }
-
-        //BasicPCDisplayPanel.build(rightPanel, p.getPartyMembers().get(0));
 
         window.add(leftPanel);
         window.add(rightPanel);

@@ -46,11 +46,14 @@ public class Creature {
         return (i - 10) / 2;
     }
 
-    public void setRolledInitiative(int i) {this.rolledInitiative = this.getStatModifier(this.getDexterity()) + i;}
+    public void setRolledInitiative(int i) {this.rolledInitiative = this.getInitiativeMod() + i;}
     public int getRolledInitiative(int i) {
         return this.getStatModifier(this.getDexterity()) + i;
     }
     public int getRolledInitiative() {return this.rolledInitiative; }
+
+    //FIXME needs more in depth calculation of all initiative modifiers
+    public int getInitiativeMod() {return this. getDexMod();}
 
 
 }

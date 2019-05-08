@@ -41,6 +41,13 @@ public class PlayerCharacter extends Creature {
     public void setCharacterLevel(int characterLevel) {
         this.characterLevel = characterLevel;
     }
+    public void setCharacterLevel(){
+        int totalLevel = 0;
+        for(CharacterClass c : this.getCharacterClasses()){
+            totalLevel += c.getClassLevel();
+        }
+        this.characterLevel = totalLevel;
+    }
     public void setInspiration(int inspiration) {this.inspiration = inspiration;}
     public void setCharacterClasses(ArrayList<CharacterClass> characterClasses) {this.characterClasses = characterClasses;}
     public void setAbilityScores(int[] abilityScores) {this.abilityScores = abilityScores;}
@@ -50,8 +57,13 @@ public class PlayerCharacter extends Creature {
     public void setAlignment(String alignment) {this.alignment = alignment;}
     public void setExperiencePoints(int experiencePoints) {this.experiencePoints = experiencePoints;}
     public void setSpeed(int speed) {this.speed = speed;}
-    public void setHitPoints(int hitPoints) {this.hitPoints = hitPoints;}
-    public void setCurrentHitPoints(int currentHitPoints) {this.currentHitPoints = currentHitPoints;}
+    public void setSpeed(){
+        //FIXME Only contains core classes, doesn't allow for custom classes
+        String[] slow = new String[]{"Dwarf", "Halfling", "Gnome"};//25
+        this.speed = (Arrays.asList(slow).contains(this.getRace())) ? 25 : 30;
+    }
+//    public void setHitPoints(int hitPoints) {this.hitPoints = hitPoints;}
+//    public void setCurrentHitPoints(int currentHitPoints) {this.currentHitPoints = currentHitPoints;}
     public void setTemporaryHitPoints(int temporaryHitPoints) {this.temporaryHitPoints = temporaryHitPoints;}
     public void setPersonalityTraits(String personalityTraits) {this.personalityTraits = personalityTraits;}
     public void setIdeals(String ideals) {this.ideals = ideals;}
@@ -86,14 +98,9 @@ public class PlayerCharacter extends Creature {
     public String getBackground() {return background;}
     public String getAlignment() {return alignment;}
     public int getExperiencePoints() {return experiencePoints;}
-    //FIXME Speed depends on race, and will be updated when Race objects are implemented
-
-    public int getSpeed() {
-        String[] slow = new String[]{"Dwarf", "Halfling"};//25
-        String[] fast = new String[]{"Elf", };//30
-        return speed;}
-    public int getHitPoints() {return hitPoints;}
-    public int getCurrentHitPoints() {return currentHitPoints;}
+    public int getSpeed() {return speed;}
+//    public int getHitPoints() {return hitPoints;}
+//    public int getCurrentHitPoints() {return currentHitPoints;}
     public int getTemporaryHitPoints() {return temporaryHitPoints;}
     public String getPersonalityTraits() {return personalityTraits;}
     public String getIdeals() {return ideals;}
@@ -225,6 +232,31 @@ public class PlayerCharacter extends Creature {
         return str;
     }
 
+    public String getHitDieAsString(){
+        StringBuilder ret = new StringBuilder();
+        int[] dieCount = new int[]{0,0,0,0};
+        int[] dieVals = new int[]{6,8,10,12};
+        for(CharacterClass c : getCharacterClasses()){
+            if(c.getHitDieValue() == dieVals[0]){
+                dieCount[0] += c.getClassLevel();
+            } else if(c.getHitDieValue() == dieVals[1]){
+                dieCount[1] += c.getClassLevel();
+            } else if(c.getHitDieValue() == dieVals[2]){
+                dieCount[2] += c.getClassLevel();
+            } else if(c.getHitDieValue() == dieVals[3]) {
+                dieCount[3] += c.getClassLevel();
+            }
+        }
+
+        for(int i = 0; i < dieCount.length; i++){
+            if (dieCount[i] != 0) {
+                ret.append(dieCount[i]).append("d").append(dieVals[i]).append(" + ");
+
+            }
+        }
+        return ret.substring(0, ret.length()-3);
+    }
+
     public int[] getAbilityMods(){
         int[] mods = new int[6];
         for(int i = 0; i < mods.length; i++){
@@ -238,7 +270,7 @@ public class PlayerCharacter extends Creature {
     }
 
     public int getArmorClass(){
-        return 10 + getAbilityMods()[2];
+        return 10 + getAbilityMods()[1];
     }
 
     public void setFieldsFromFile(String str) {
@@ -250,6 +282,7 @@ public class PlayerCharacter extends Creature {
         17 --> OtherProficiencies, 18 --> Equipment, 19 --> ListOfAbilities, 20 --> Currency, 21 --> Classes
         22 --> Race, 23 --> Party name, 24 --> backstory
         */
+
         String[] values = str.split(Del.MAIN_DEL);
 
         this.setPlayerName(values[0]);
@@ -286,7 +319,7 @@ public class PlayerCharacter extends Creature {
         this.setExperiencePoints(Integer.parseInt(values[8]));
         this.setSpeed(Integer.parseInt(values[9]));
         this.setMaxHP(Integer.parseInt(values[10]));
-        this.setCurrentHitPoints(Integer.parseInt(values[11]));
+        this.setCurrentHP(Integer.parseInt(values[11]));
         this.setTemporaryHitPoints(Integer.parseInt(values[12]));
 
         this.setPersonalityTraits(values[13]);
@@ -354,7 +387,9 @@ public class PlayerCharacter extends Creature {
 
             }
         }
+        this.setCharacterLevel();
         this.setRace(values[22]);
+        this.setSpeed();
         this.setPartyName(values[23]);
         this.setBackstory(values[24]);
     }
@@ -381,7 +416,7 @@ public class PlayerCharacter extends Creature {
         str += this.getExperiencePoints() + Del.MAIN_DEL;
         str += this.getSpeed() + Del.MAIN_DEL;
         str += this.getMaxHP() + Del.MAIN_DEL;
-        str += this.getCurrentHitPoints() + Del.MAIN_DEL;
+        str += this.getCurrentHP() + Del.MAIN_DEL;
         str += this.getTemporaryHitPoints() + Del.MAIN_DEL;
         str += this.getPersonalityTraits() + Del.MAIN_DEL;
         str += this.getIdeals() + Del.MAIN_DEL;
@@ -399,6 +434,7 @@ public class PlayerCharacter extends Creature {
 
         str += this.getRace() + Del.MAIN_DEL;
         str += this.getPartyName() + Del.MAIN_DEL;
+        str += this.getBackstory() + Del.MAIN_DEL;
         return str;
     }
 
@@ -430,7 +466,7 @@ public class PlayerCharacter extends Creature {
     public String getPlayerName(){
         return playerName;
     }
-
+    //FIXME Armor, Feats, and other features impact AC<
     public int getOtherACMods(){
         return 0;
     }

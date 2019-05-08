@@ -46,7 +46,7 @@ class BasicPCDisplayPanel {
         canvas.add(labelGenSubtle("HP: ", GUIBuilder.MAIN_FONT), geometry);
 
         geometry.gridx = 3;
-        canvas.add(labelGenSolid(pc.getCurrentHitPoints() + " / " + pc.getMaxHP(), GUIBuilder.MAIN_FONT), geometry);
+        canvas.add(labelGenSolid(pc.getCurrentHP() + " / " + pc.getMaxHP(), GUIBuilder.MAIN_FONT), geometry);
 
         if(pc.getTemporaryHitPoints() > 0){
             

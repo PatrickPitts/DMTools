@@ -351,6 +351,7 @@ public class AddCharacterWindow {
 
             geometry.gridx = 1;
             textFieldArrayList.get(i).setColumns(4);
+            textFieldArrayList.get(i).setText("0");
             hpAndMoneyPanel.add(textFieldArrayList.get(i), geometry);
         }
 
@@ -440,7 +441,7 @@ public class AddCharacterWindow {
                                       ArrayList<JComboBox<String>> comboBoxArrayList, ArrayList<JCheckBox> checkBoxArrayList) throws IOException {
         Party p = Main.getP();
         //Array of strings that will be updated from the different Arraylists, then used to build the final String to build the character
-        String[] stringsToAdd = new String[24];
+        String[] stringsToAdd = new String[25];
         //the main string that will store the data for the new created character
         String str = "";
         /* These are the indices of the entries needed to build a new PlayerCharacter object
@@ -448,7 +449,7 @@ public class AddCharacterWindow {
         5 --> SkillProficiencies, 6 --> Background, 7 --> Alignment, 8 --> EXP, 9 --> Speed, 10 --> MaxHP,
         11 --> CurrentHP, 12 --> TempHP, 13 --> Personality, 14 --> Ideals, 15 --> Bonds, 16 --> Flaws,
         17 --> OtherProficiencies, 18 --> Equipment, 19 --> ListOfAbilities, 20 --> Currency,
-        21 --> Classes, 22 --> Race, 23 --> PartyName
+        21 --> Classes, 22 --> Race, 23 --> PartyName, 24 --> Background
         */
         /*
         ArrayList that holds all the JTextFields for the page, and their intended data variable association
