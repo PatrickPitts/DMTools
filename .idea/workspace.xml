@@ -66,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AbbreviatedParty.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-656">
+            <state relative-caret-position="1254">
               <caret line="59" column="16" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -78,11 +78,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CharacterSheet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-964">
+            <state relative-caret-position="1694">
               <caret line="77" column="10" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="class#3326:3947" />
                 <element signature="method#buildTopPanel#0;class#CharacterSheet#0" />
                 <element signature="method#buildSavesPanel#0;class#CharacterSheet#0" />
                 <element signature="method#buildSkillsPanel#0;class#CharacterSheet#0" />
@@ -104,7 +103,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUIBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
+            <state relative-caret-position="1276">
               <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
             </state>
           </provider>
@@ -125,24 +124,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PlayerCharacter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="91" column="18" lean-forward="true" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
+            <state relative-caret-position="1760">
+              <caret line="91" column="18" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9966#9967#0" expanded="true" />
-                <element signature="e#10012#10013#0" expanded="true" />
-                <element signature="e#10045#10046#0" expanded="true" />
-                <element signature="e#10092#10093#0" expanded="true" />
-                <element signature="e#17131#17132#0" expanded="true" />
-                <element signature="e#17182#17183#0" expanded="true" />
-                <element signature="e#17237#17238#0" expanded="true" />
-                <element signature="e#17277#17278#0" expanded="true" />
-                <element signature="e#17317#17318#0" expanded="true" />
-                <element signature="e#17353#17354#0" expanded="true" />
-                <element signature="e#17389#17390#0" expanded="true" />
-                <element signature="e#17422#17423#0" expanded="true" />
-                <element signature="e#17511#17512#0" expanded="true" />
-                <element signature="e#17535#17536#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -151,7 +136,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BasicPCDisplayPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
+            <state relative-caret-position="1056">
               <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -163,12 +148,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AddCharacterWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6314">
+            <state relative-caret-position="7634">
               <caret line="353" column="50" selection-start-line="353" selection-start-column="50" selection-end-line="353" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#actionPerformed#0;class#1720:4557" />
-                <element signature="class#4604:5039" />
                 <element signature="method#buildCharacter#0;class#AddCharacterWindow#0" />
               </folding>
             </state>
@@ -178,7 +161,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ChooseParty.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
+            <state relative-caret-position="792">
               <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -294,7 +277,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -307,16 +289,11 @@
               <item name="DMTools" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="DMTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DMTools" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="TestGUIFOrm" type="e9f4de52:FormNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -396,8 +373,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17493297" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17895442" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -756,60 +734,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BasicPCDisplayPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/TestFX.java" />
+    <entry file="file://$PROJECT_DIR$/src/AbbreviatedParty.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
+        <state relative-caret-position="1254">
+          <caret line="59" column="16" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PlayerCharacter.java">
+    <entry file="file://$PROJECT_DIR$/src/CharacterSheet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="91" column="18" lean-forward="true" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
+        <state relative-caret-position="1694">
+          <caret line="77" column="10" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9966#9967#0" expanded="true" />
-            <element signature="e#10012#10013#0" expanded="true" />
-            <element signature="e#10045#10046#0" expanded="true" />
-            <element signature="e#10092#10093#0" expanded="true" />
-            <element signature="e#17131#17132#0" expanded="true" />
-            <element signature="e#17182#17183#0" expanded="true" />
-            <element signature="e#17237#17238#0" expanded="true" />
-            <element signature="e#17277#17278#0" expanded="true" />
-            <element signature="e#17317#17318#0" expanded="true" />
-            <element signature="e#17353#17354#0" expanded="true" />
-            <element signature="e#17389#17390#0" expanded="true" />
-            <element signature="e#17422#17423#0" expanded="true" />
-            <element signature="e#17511#17512#0" expanded="true" />
-            <element signature="e#17535#17536#0" expanded="true" />
+            <element signature="method#buildTopPanel#0;class#CharacterSheet#0" />
+            <element signature="method#buildSavesPanel#0;class#CharacterSheet#0" />
+            <element signature="method#buildSkillsPanel#0;class#CharacterSheet#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChooseParty.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/TestGUIFOrm.java">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AddCharacterWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/GUIBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6314">
-          <caret line="353" column="50" selection-start-line="353" selection-start-column="50" selection-end-line="353" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#actionPerformed#0;class#1720:4557" />
-            <element signature="class#4604:5039" />
-            <element signature="method#buildCharacter#0;class#AddCharacterWindow#0" />
-          </folding>
+        <state relative-caret-position="1276">
+          <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -823,46 +778,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AbbreviatedParty.java">
+    <entry file="file://$PROJECT_DIR$/src/PlayerCharacter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-656">
-          <caret line="59" column="16" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
+        <state relative-caret-position="1760">
+          <caret line="91" column="18" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUIBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/BasicPCDisplayPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestFX.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CharacterSheet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-964">
-          <caret line="77" column="10" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
+        <state relative-caret-position="1056">
+          <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3326:3947" />
-            <element signature="method#buildTopPanel#0;class#CharacterSheet#0" />
-            <element signature="method#buildSavesPanel#0;class#CharacterSheet#0" />
-            <element signature="method#buildSkillsPanel#0;class#CharacterSheet#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestGUIFOrm.java">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/AddCharacterWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7634">
+          <caret line="353" column="50" selection-start-line="353" selection-start-column="50" selection-end-line="353" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#buildCharacter#0;class#AddCharacterWindow#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChooseParty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TestGUIFOrm.form">
       <provider selected="true" editor-type-id="ui-designer" />
