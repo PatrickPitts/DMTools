@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 public class TestGUIFOrm {
+<<<<<<< HEAD
     private JTextField textField1 = new JTextField();
     private JPanel headerPanel = new JPanel();
     private JPanel chrNamePanel = new JPanel();
@@ -35,12 +36,35 @@ public class TestGUIFOrm {
     private JTextField initField = new JTextField();
     private JPanel pageOnePanel = new JPanel();
     private JTextField a25TextField = new JTextField();
+=======
+    private JLabel chrNameSub;
+    private JTextField classField;
+    private JTextField raceField;
+    private JTextField chrNameTextBox;
+    private JTextField backgroundField;
+    private JTextField alignField;
+    private JTextField playerNameField;
+    private JTextField expField;
+    private JTextField strField;
+    private JLabel strengthLabel;
+    private JLabel strModLabel;
+    private JTextField a0TextField;
+    private JTextField textField1;
+    private JCheckBox ___StrengthCheckBox;
+    private JCheckBox checkBox1;
+>>>>>>> ff4f3ced2cca60f3d6e814ef09a554b95f323b4b
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
 
+<<<<<<< HEAD
     public void main(String[] args){
         System.out.print("lol");
+=======
+    public void buildShowSheet(PlayerCharacter p){
+
+        strModLabel.setText(""+p.getStrMod());
+>>>>>>> ff4f3ced2cca60f3d6e814ef09a554b95f323b4b
     }
 }
