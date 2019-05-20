@@ -58,6 +58,17 @@ public class ChooseParty{
         geometry.gridx = 0;
         window.add(pane);
 
+        //Builds the menu bar
+        JMenuBar menuBar = new JMenuBar();
+        JMenu featsMenu = new JMenu("Feats");
+        JMenuItem seeFeats = new JMenuItem("Show Feats");
+        seeFeats.addActionListener((event) -> new ViewAllFeatsWindow());
+
+        featsMenu.add(seeFeats);
+        menuBar.add(featsMenu);
+        window.setJMenuBar(menuBar);
+
+
         pane.repaint();
         window.repaint();
 

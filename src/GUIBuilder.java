@@ -43,22 +43,23 @@ public class GUIBuilder {
     public static JTextField presentationField(String str, Font f){
         JTextField t = new JTextField(str);
         t.setFont(f);
+        t.setHorizontalAlignment(JTextField.CENTER);
         t.setColumns(str.length()+1);
         t.setFocusable(false);
 
         return t;
     }
 
-    public static JPanel textFieldwithSubscript(String textFieldString, String subscriptString, Font f){
+    public static JPanel textFieldwithSubscript(String textFieldString, String subscriptString){
         JPanel ret = new JPanel();
         GridBagConstraints c = new GridBagConstraints();
         ret.setLayout(new GridBagLayout());
 
         JTextField t = new JTextField(textFieldString);
-        t.setFont(f);
+        t.setFont(LARGE_FONT);
 
         c.gridx = 0; c.gridy = 0;
-        ret.add(t, f);
+        ret.add(t, c);
 
         c.gridy = 1;
         ret.add(GUIBuilder.labelGenSolid(subscriptString, GUIBuilder.SUB_FONT), c);

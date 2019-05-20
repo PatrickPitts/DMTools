@@ -5,10 +5,12 @@ public class Main {
 
 
     private static Party p;
+    private static FeatReader feats = new FeatReader();
 
     static {
         try {
             setP(FileLoader.getPartyFromFile());
+            feats = new FeatReader();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,5 +33,9 @@ public class Main {
 
     public static void setP(Party p) {
         Main.p = p;
+    }
+
+    public static FeatReader getFeatReader() {
+        return feats;
     }
 }

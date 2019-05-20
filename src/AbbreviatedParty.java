@@ -55,9 +55,10 @@ public class AbbreviatedParty extends Frame {
             public void actionPerformed(ActionEvent e) {
                 int indexOfSelected = playerList.getSelectedIndex();
 
-                //CharacterSheetWindow.buildShowPanel(p.getPartyMembers().get(indexOfSelected));
-                CharacterSheet c = new CharacterSheet();
-                c.buildShowSheet(p.getPartyMembers().get(indexOfSelected));
+//                CharacterSheet c = new CharacterSheet();
+//                c.buildShowSheet(p.getPartyMembers().get(indexOfSelected));
+                CharacterSheetWindow c = new CharacterSheetWindow(p.getPartyMembers().get(indexOfSelected));
+                //c.buildShowPanel();
             }
         };
 

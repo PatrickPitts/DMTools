@@ -9,13 +9,13 @@ import java.util.spi.AbstractResourceBundleProvider;
 public class CharacterSheet {
 
     private static GridBagConstraints geometry = new GridBagConstraints();
-    private static ArrayList<JCheckBox> saveBoxes = new ArrayList<>();
-    private static ArrayList<JCheckBox> skillBoxes = new ArrayList<>();
-    private static ArrayList<JTextArea> personalityAreas = new ArrayList<>();
+    private ArrayList<JCheckBox> saveBoxes;
+    private ArrayList<JCheckBox> skillBoxes;
+    private ArrayList<JTextArea> personalityAreas;
 
     // 0 --> AC, 1 --> Init, 2 --> Speed, 3 --> Current HP
-    private static ArrayList<JTextField> combatFields = new ArrayList<>();
-    private static ArrayList<JTextField> headerFields = new ArrayList<>();
+    private ArrayList<JTextField> combatFields;
+    private ArrayList<JTextField> headerFields;
 
     private static String[] skillTags  = new String[]{"Acrobatics", "Animal Handling",
             "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation",
@@ -24,7 +24,7 @@ public class CharacterSheet {
     private static String[] abilityTags = new String[]{"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
     private static String[] personalityTags = new String[]{"Personality Traits", "Ideals", "Bonds", "Flaws"};
 
-    private static void resetFields(){
+    private void resetFields(){
         saveBoxes.clear();
         skillBoxes.clear();
         personalityAreas.clear();
@@ -32,11 +32,19 @@ public class CharacterSheet {
         headerFields.clear();
     }
 
-    CharacterSheet(){}
+    CharacterSheet(){
+        geometry.gridy = 0; geometry.gridx = 0; geometry.gridheight = 1; geometry.gridwidth = 1;
+        saveBoxes = new ArrayList<>();
+        skillBoxes = new ArrayList<>();
+        combatFields = new ArrayList<>();
+        headerFields = new ArrayList<>();
+        personalityAreas = new ArrayList<>();
+
+    }
 
     public void buildShowSheet(PlayerCharacter p){
 
-        geometry.gridx = 0; geometry.gridy = 0; geometry.gridwidth = 1; geometry.gridheight = 0;
+        geometry.gridx = 0; geometry.gridy = 0; geometry.gridwidth = 1; geometry.gridheight = 1;
         JFrame window = new JFrame(p.getName());
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -63,28 +71,28 @@ public class CharacterSheet {
 
         geometry.ipady = 5; geometry.ipadx = 5;
         geometry.gridx=0; geometry.gridy = 0; geometry.gridwidth = 6;
-        //canvas.add(topPanel, geometry);
+        canvas.add(topPanel, geometry);
 
         geometry.gridy = 1; geometry.gridheight = 4; geometry.gridwidth = 1;
         canvas.add(abilitiesPanel, geometry);
 
         geometry.gridx = 1; geometry.gridheight = 1;
-        //canvas.add(savesPanel, geometry);
+        canvas.add(savesPanel, geometry);
 
         geometry.gridy = 2;
-        //canvas.add(skillPanel, geometry);
+        canvas.add(skillPanel, geometry);
 
         geometry.gridx = 2; geometry.gridy = 1;
-        //canvas.add(combatPanel, geometry);
+        canvas.add(combatPanel, geometry);
 
         geometry.gridx = 4; geometry.gridy = 1; geometry.gridheight = 4;
-        //canvas.add(personalityPanel, geometry);
+        canvas.add(personalityPanel, geometry);
 
         geometry.gridx = 0; geometry.gridy = 0;
         window.add(canvas);
 
-        Dimension windowSize = window.getPreferredSize();
-        window.setSize((int) (windowSize.getWidth() + 25), (int) (windowSize.getHeight() + 50));
+//        Dimension windowSize = window.getPreferredSize();
+//        window.setSize((int) (windowSize.getWidth() + 25), (int) (windowSize.getHeight() + 50));
 
 
         //deals with the glass pane, which will prevent the user from interacting with the UI directly
@@ -121,7 +129,7 @@ public class CharacterSheet {
 
         window.getGlassPane().setVisible(true);
 
-
+        window.pack();
         window.repaint();
         window.revalidate();
         window.setVisible(true);
@@ -388,7 +396,6 @@ public class CharacterSheet {
             ret.add(GUIBuilder.labelGenSolid(personalityTags[i], GUIBuilder.SUB_FONT), geometry);
             geometry.gridy++;
         }
-
         return ret;
     }
 }
