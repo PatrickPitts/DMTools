@@ -1,8 +1,6 @@
-import java.io.File;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +10,7 @@ public class FileLoader {
 
     public static String getData() throws IOException{
 
-        String path = "data.txt";
+        String path = "pc_data.txt";
         BufferedReader b = new BufferedReader( new FileReader(path) );
 
         return b.readLine();

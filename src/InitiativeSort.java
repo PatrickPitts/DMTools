@@ -48,6 +48,9 @@ public class InitiativeSort {
                 ArrayList<Creature> sorted = sort(players);
                 sortedPanel[0].removeAll();
                 sortedPanel[0].add(sortPanel(sorted));
+                for(JTextField t : rolls){
+                    t.setText("0");
+                }
 
                 window.repaint();
                 window.revalidate();
@@ -108,7 +111,7 @@ public class InitiativeSort {
             newArr.get(i).setRolledInitiative(val);
         }
 
-        //FIXME implement initiative initizalization
+        //FIXME implement initiative initialization
         //sorts newArr in ascending order
         int n = newArr.size();
         for(int i = 1; i < n; i++){

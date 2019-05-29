@@ -2,8 +2,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class ViewAllFeatsWindow extends JFrame {
 
@@ -11,17 +10,17 @@ public class ViewAllFeatsWindow extends JFrame {
 
     ViewAllFeatsWindow(){
         setLayout(new GridBagLayout());
-
+        setTitle("Feats");
         JTextArea featInfoDisplay = new JTextArea();
-        //featInfoDisplay.setPreferredSize(new Dimension(200,80));
+        featInfoDisplay.setSize(new Dimension(200,80));
+        featInfoDisplay.setFont(GUIBuilder.MAIN_FONT);
+        featInfoDisplay.setLineWrap(true);
+        featInfoDisplay.setWrapStyleWord(true);
+        featInfoDisplay.setRows(45);
+        featInfoDisplay.setColumns(50);
 
-        ArrayList<String[]> featsArrayList = FeatReader.getFeatStrings();
-        //ArrayList<String> featNames = new ArrayList<>();
-        String[] listOfFeatNames = new String[featsArrayList.size()];
-
-        for(int i = 1; i < featsArrayList.size(); i++){
-            listOfFeatNames[i] = featsArrayList.get(i)[0];
-        }
+        String[] temp = new String[AbilityReader.getFeatNames().size()];
+        String[] listOfFeatNames = AbilityReader.getFeatNames().toArray(temp);
 
         JList featJList = new JList<>(listOfFeatNames);
         featJList.setVisibleRowCount(5);
@@ -31,10 +30,12 @@ public class ViewAllFeatsWindow extends JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 featInfoDisplay.setText("");
                 StringBuilder displayText = new StringBuilder();
-                String[] fArray = featsArrayList.get(featJList.getSelectedIndex());
+                String selectedFeat = listOfFeatNames[featJList.getSelectedIndex()];
 
-                displayText.append(fArray[0]);
-                featInfoDisplay.setText(displayText.toString());
+                featInfoDisplay.setText(GUIBuilder.getFeatDisplayString(selectedFeat));
+                featInfoDisplay.setSize(new Dimension(200,80));
+                revalidate();
+
 
             }
         });
@@ -48,7 +49,7 @@ public class ViewAllFeatsWindow extends JFrame {
         add(featInfoDisplay, geometry);
         setVisible(true);
 
-        setSize(400,400);
+        setSize(getPreferredSize().width+25,getPreferredSize().height+25 );
         revalidate();
         repaint();
 

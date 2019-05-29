@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class CharacterSheetWindow extends JFrame {
@@ -22,6 +23,8 @@ public class CharacterSheetWindow extends JFrame {
 
     CharacterSheetWindow(PlayerCharacter p){
 
+        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+
         geometry.gridy = 0; geometry.gridx = 0; geometry.gridheight = 1; geometry.gridwidth = 1;
         saveBoxes = new ArrayList<>();
         skillBoxes = new ArrayList<>();
@@ -33,43 +36,60 @@ public class CharacterSheetWindow extends JFrame {
         setTitle(p.getName());
         setLayout(new GridBagLayout());
 
-        JPanel canvas = new JPanel();
-        canvas.setLayout(new GridBagLayout());
+        JTabbedPane characterPageTabs = new JTabbedPane();
+        //characterPageTabs.setLayout(new GridBagLayout());
+
+        JPanel page1Canvas = new JPanel();
+        JPanel page2Canvas = new JPanel();
+        JPanel page3Canvas = new JPanel();
+        page1Canvas.setLayout(new GridBagLayout());
+        page2Canvas.setLayout(new GridBagLayout());
+        page3Canvas.setLayout(new GridBagLayout());
 
         JPanel topPanel = buildTopPanel(p);
-        JPanel abilitiesPanel = buildAbilitiesPanel(p);
+        JPanel abilitiesPanel = buildAbilityScorePanel(p);
         JPanel savesPanel = buildSavesPanel(p);
         JPanel skillsPanel = buildSkillsPanel(p);
         JPanel combatPanel = buildCombatPanel(p);
         JPanel personalityPanel = buildPersonalityPanel(p);
+        JPanel featuresAndTraitsPanel = buildFeaturesAndTraitsPanel(p);
+        JPanel spellsPanel = buildSpellPanel(p);
 
-        geometry.gridwidth = 6; geometry.gridx = 0; geometry.gridy = 0;
-        canvas.add(topPanel, geometry);
+        //Builds page 1 of the tabbed character display
+        geometry.gridwidth = 7; geometry.gridx = 0; geometry.gridy = 0;
+        page1Canvas.add(topPanel, geometry);
 
         geometry.gridwidth = 1; geometry.gridheight = 4; geometry.gridx = 0 ;geometry.gridy = 1;
-        canvas.add(abilitiesPanel, geometry);
+        page1Canvas.add(abilitiesPanel, geometry);
 
         geometry.gridheight = 2; geometry.gridwidth = 1; geometry.gridx = 1; geometry.gridy = 1;
-        canvas.add(savesPanel, geometry);
+        page1Canvas.add(savesPanel, geometry);
 
         geometry.gridheight = 2; geometry.gridwidth = 1; geometry.gridx = 1; geometry.gridy = 3;
-        canvas.add(skillsPanel, geometry);
+        page1Canvas.add(skillsPanel, geometry);
 
-        geometry.gridheight = 2; geometry.gridwidth = 2; geometry.gridx =2; geometry.gridy = 1;
-        canvas.add(combatPanel, geometry);
+        geometry.gridheight = 2; geometry.gridwidth = 2; geometry.gridx = 2; geometry.gridy = 1;
+        page1Canvas.add(combatPanel, geometry);
 
         geometry.gridheight = 2; geometry.gridwidth = 2; geometry.gridx = 4; geometry.gridy = 1;
-        canvas.add(personalityPanel, geometry);
+        page1Canvas.add(personalityPanel, geometry);
 
-//        ArrayList<JTextField> list = findJTextFields(canvas);
-//        for(JTextField j : list){
-//            System.out.println(j.getText());
-//        }
+        geometry.gridheight = 2; geometry.gridx = 5; geometry.gridy = 3;
+        page1Canvas.add(featuresAndTraitsPanel, geometry);
 
+        resetGeometry();
+        page2Canvas.add(spellsPanel, geometry);
 
+        //fixme needs 2nd and 3rd panels so far
+        characterPageTabs.addTab("Page 1", page1Canvas);
+        characterPageTabs.addTab("Page 2", page2Canvas);
+        characterPageTabs.addTab("Page 3", page3Canvas);
 
-        add(canvas);
+        getContentPane().add(characterPageTabs);
         pack();
+        revalidate();
+        setSize(screensize);
+        //setSize(getPreferredSize().width + 25, screensize.height);
         setVisible(true);
     }
 
@@ -149,7 +169,7 @@ public class CharacterSheetWindow extends JFrame {
         return ret;
     }
 
-    private JPanel buildAbilitiesPanel(PlayerCharacter p){
+    private JPanel buildAbilityScorePanel(PlayerCharacter p){
 
         JPanel ret = new JPanel();
         ret.setLayout(new GridBagLayout());
@@ -176,7 +196,7 @@ public class CharacterSheetWindow extends JFrame {
             abilityPanels.get(i).add(GUIBuilder.labelGenSolid(p.getAbilityModsAsString()[i], GUIBuilder.LARGE_FONT), geometry);
 
             geometry.gridy++;
-            abilityPanels.get(i).add(GUIBuilder.labelGenSubtle(Integer.toString(p.getAbilityScores()[i]), GUIBuilder.MAIN_FONT), geometry);
+            abilityPanels.get(i).add(GUIBuilder.presentationField(Integer.toString(p.getAbilityScores()[i]), GUIBuilder.SUB_FONT), geometry);
 
             abilityPanels.get(i).setBorder(GUIBuilder.bufferBoarder);
 
@@ -366,6 +386,138 @@ public class CharacterSheetWindow extends JFrame {
         return ret;
     }
 
+    private JPanel buildFeaturesAndTraitsPanel(PlayerCharacter p){
+        JPanel ret = new JPanel();
+        ret.setLayout(new GridBagLayout());
+        resetGeometry();
+
+        String[] featureNameArray = new String[p.getAbilities().size()];
+        for(int i = 0; i < featureNameArray.length; i++){
+            featureNameArray[i] = p.getAbilities().get(i);
+        }
+
+        JList<String> featureNameList = new JList<>(featureNameArray) {
+            public String getToolTipText(MouseEvent event){
+                int index = locationToIndex(event.getPoint());
+                String selectedFeature = (String) getModel().getElementAt(index);
+                return AbilityReader.getFeatBody(selectedFeature);
+            }
+
+        };
+        featureNameList.setVisibleRowCount(10);
+
+        JScrollPane featureScrollPane = new JScrollPane(featureNameList);
+        ret.add(featureScrollPane, geometry);
+        geometry.gridy++;
+
+        ret.add(GUIBuilder.labelGenSolid("Features and Traits", GUIBuilder.SUB_FONT), geometry);
+
+
+        return ret;
+    }
+
+    private JPanel buildSpellPanel(PlayerCharacter p){
+
+        resetGeometry();
+
+        JPanel ret = new JPanel();
+        ret.setLayout(new GridBagLayout());
+
+        JPanel col1 = new JPanel();
+        JPanel col2 = new JPanel();
+        JPanel col3 = new JPanel();
+
+        col1.setLayout(new GridBagLayout());
+        col2.setLayout(new GridBagLayout());
+        col3.setLayout(new GridBagLayout());
+
+
+        String[] l = new String[]{"a","b","c","d","e","f","g","h","i"};
+
+        JList level0Spells = new JList();
+        JList level1Spells = new JList();
+        JList level2Spells = new JList();
+        JList level3Spells = new JList();
+        JList level4Spells = new JList();
+        JList level5Spells = new JList();
+        JList level6Spells = new JList();
+        JList level7Spells = new JList();
+        JList level8Spells = new JList();
+        JList level9Spells = new JList();
+
+        level0Spells.setVisibleRowCount(8);
+        level1Spells.setVisibleRowCount(13);
+        level2Spells.setVisibleRowCount(13);
+        level3Spells.setVisibleRowCount(13);
+        level4Spells.setVisibleRowCount(13);
+        level5Spells.setVisibleRowCount(9);
+        level6Spells.setVisibleRowCount(9);
+        level7Spells.setVisibleRowCount(9);
+        level8Spells.setVisibleRowCount(7);
+        level9Spells.setVisibleRowCount(7);
+
+        col1.add(GUIBuilder.labelGenSolid("Cantrips", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col1.add(new JScrollPane(level0Spells), geometry);
+
+        geometry.gridy++;
+        col1.add(GUIBuilder.labelGenSolid("1", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col1.add(new JScrollPane(level1Spells), geometry);
+
+        geometry.gridy++;
+        col1.add(GUIBuilder.labelGenSolid("2", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col1.add(new JScrollPane(level2Spells), geometry);
+
+        resetGeometry();
+
+        col2.add(GUIBuilder.labelGenSolid("3", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col2.add(new JScrollPane(level3Spells), geometry);
+
+        geometry.gridy++;
+        col2.add(GUIBuilder.labelGenSolid("4", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col2.add(new JScrollPane(level4Spells), geometry);
+
+        geometry.gridy++;
+        col2.add(GUIBuilder.labelGenSolid("5", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col2.add(new JScrollPane(level5Spells), geometry);
+
+        resetGeometry();
+
+        col3.add(GUIBuilder.labelGenSolid("6", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col1.add(new JScrollPane(level6Spells), geometry);
+
+        geometry.gridy++;
+        col1.add(GUIBuilder.labelGenSolid("7", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col1.add(new JScrollPane(level7Spells), geometry);
+
+        geometry.gridy++;
+        col1.add(GUIBuilder.labelGenSolid("8", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col1.add(new JScrollPane(level8Spells), geometry);
+
+        geometry.gridy++;
+        col1.add(GUIBuilder.labelGenSolid("9", GUIBuilder.MAIN_FONT), geometry);
+        geometry.gridy++;
+        col1.add(new JScrollPane(level9Spells), geometry);
+
+        resetGeometry();
+
+        ret.add(col1, geometry);
+        geometry.gridx++;
+        ret.add(col2, geometry);
+        geometry.gridx++;
+        ret.add(col3, geometry);
+
+        return ret;
+    }
+
     private ArrayList<JTextField> findJTextFields(JPanel j){
         ArrayList<JTextField> textFieldArrayList = new ArrayList<>();
         for(Component c : j.getComponents()){
@@ -377,4 +529,6 @@ public class CharacterSheetWindow extends JFrame {
         }
         return textFieldArrayList;
     }
+
+
 }

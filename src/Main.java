@@ -5,12 +5,12 @@ public class Main {
 
 
     private static Party p;
-    private static FeatReader feats = new FeatReader();
+//    private static FeatReader feats = new FeatReader();
 
     static {
         try {
             setP(FileLoader.getPartyFromFile());
-            feats = new FeatReader();
+            //feats = new FeatReader();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -22,7 +22,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner key = new Scanner(System.in);
-
+        AbilityReader.read();
+        MonsterReader.read();
+        SpellReader.read();
         //Driver.run();
         GUIDriver.main();
     }
@@ -33,9 +35,5 @@ public class Main {
 
     public static void setP(Party p) {
         Main.p = p;
-    }
-
-    public static FeatReader getFeatReader() {
-        return feats;
     }
 }

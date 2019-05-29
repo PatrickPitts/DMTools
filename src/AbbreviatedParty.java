@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -30,15 +32,24 @@ public class AbbreviatedParty extends Frame {
         JList<String> playerList = new JList<>(players);
         playerList.setSelectedIndex(0);
 
+        playerList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int indexOfSelected = playerList.getSelectedIndex();
+
+                for(int i = 0; i < players.length; i++){
+                    BasicPCDisplayPanel.buildBasic(charPanels.get(i), p.getPartyMembers().get(i));
+                }
+                BasicPCDisplayPanel.buildHighlight(charPanels.get(indexOfSelected), p.getPartyMembers().get(indexOfSelected));
+            }
+        });
+        
         MouseListener clickOnList = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int indexOfSelected = playerList.getSelectedIndex();
                 if (e.getClickCount() == 2){
-                    for(int i = 0; i < players.length; i++){
-                        BasicPCDisplayPanel.buildBasic(charPanels.get(i), p.getPartyMembers().get(i));
-                    }
-                    BasicPCDisplayPanel.buildHighlight(charPanels.get(indexOfSelected), p.getPartyMembers().get(indexOfSelected));
+                    CharacterSheetWindow c = new CharacterSheetWindow(p.getPartyMembers().get(indexOfSelected));
                 }
             }
         };
@@ -54,11 +65,8 @@ public class AbbreviatedParty extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int indexOfSelected = playerList.getSelectedIndex();
-
-//                CharacterSheet c = new CharacterSheet();
-//                c.buildShowSheet(p.getPartyMembers().get(indexOfSelected));
                 CharacterSheetWindow c = new CharacterSheetWindow(p.getPartyMembers().get(indexOfSelected));
-                //c.buildShowPanel();
+
             }
         };
 

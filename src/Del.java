@@ -1,6 +1,6 @@
 
 /*
-Stores the essential delimiters used to split data in the data.txt save info
+Stores the essential delimiters used to split data in the pc_data.txt save info
 
  **/
 

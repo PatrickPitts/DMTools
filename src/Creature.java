@@ -52,6 +52,14 @@ public class Creature {
     }
     public int getRolledInitiative() {return this.rolledInitiative; }
 
+    public int[] getStats() {
+        return stats;
+    }
+
+    public void setStats(int[] stats) {
+        this.stats = stats;
+    }
+
     //FIXME needs more in depth calculation of all initiative modifiers
     public int getInitiativeMod() {return this. getDexMod();}
 

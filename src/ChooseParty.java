@@ -59,13 +59,23 @@ public class ChooseParty{
         window.add(pane);
 
         //Builds the menu bar
-        JMenuBar menuBar = new JMenuBar();
-        JMenu featsMenu = new JMenu("Feats");
-        JMenuItem seeFeats = new JMenuItem("Show Feats");
-        seeFeats.addActionListener((event) -> new ViewAllFeatsWindow());
+//        JMenuBar menuBar = new JMenuBar();
+//
+//        JMenu featsMenu = new JMenu("Feats");
+//        JMenuItem seeFeats = new JMenuItem("Show Feats");
+//        seeFeats.addActionListener((event) -> new ViewAllFeatsWindow());
+//
+//        JMenu monsterMenu = new JMenu("Monsters");
+//        JMenuItem seeMonsters = new JMenuItem("View Monster Manual");
+//        seeMonsters.addActionListener((event) -> new ViewAllMonstersWindow());
+//
+//        featsMenu.add(seeFeats);
+//        menuBar.add(featsMenu);
+//
+//        monsterMenu.add(seeMonsters);
+//        menuBar.add(monsterMenu);
 
-        featsMenu.add(seeFeats);
-        menuBar.add(featsMenu);
+        JMenuBar menuBar = GUIBuilder.getStandardMenuBar();
         window.setJMenuBar(menuBar);
 
 

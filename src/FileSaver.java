@@ -4,7 +4,7 @@ public class FileSaver{
 
     public static void main(String[] args) throws IOException{
 
-        String filename = "data.txt";
+        String filename = "pc_data.txt";
 
         String toSave = "";
 
@@ -72,7 +72,7 @@ public class FileSaver{
     }
 
     public static void saveData(String saveString) throws IOException {
-        String filename = "data.txt";
+        String filename = "pc_data.txt";
 
         BufferedWriter out = new BufferedWriter( new FileWriter(filename));
         out.write(saveString);

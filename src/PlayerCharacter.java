@@ -387,19 +387,20 @@ public class PlayerCharacter extends Creature {
 
             }
         }
+        for(CharacterClass c : characterClasses){
+            this.abilities.addAll(c.getAllClassFeatures());
+        }
+        for(int i = 0; i < abilities.size(); i++){
+            if(abilities.get(i).equals("None")){
+                abilities.remove(i);
+            }
+        }
+
         this.setCharacterLevel();
         this.setRace(values[22]);
         this.setSpeed();
         this.setPartyName(values[23]);
         this.setBackstory(values[24]);
-    }
-
-    public void printAllFields(){
-
-        System.out.println(this.getCharacterName());
-        //System.out.println(this.getCharacterClass());
-        System.out.println(this.getAbilities());
-        System.out.println(this.getBonds());
     }
 
     public String exportDataString(){

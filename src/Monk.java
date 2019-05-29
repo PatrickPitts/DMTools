@@ -38,7 +38,6 @@ public class Monk extends CharacterClass {
         this.setClassLevel(Integer.parseInt(vals[2]));
     }
 
-    //FIXME if you change the subclass, the .add methods wont clear out old data, only adds ontop
     public void setSubclass(String str){
         switch (str) {
             case "Way of the Open Hand":

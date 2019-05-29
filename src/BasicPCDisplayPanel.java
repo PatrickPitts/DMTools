@@ -136,7 +136,7 @@ class BasicPCDisplayPanel {
         canvas.add(labelGenSubtle("Perception: ", GUIBuilder.MAIN_FONT), geometry);
 
         geometry.gridx = 1;
-        int i = 10 + pc.getStatModifier(pc.getWisdom()) + pc.getSkillProficiency()[11]*pc.getProficiencyBonus();
+        int i = 10 + pc.getAbilityMods()[4] + pc.getSkillProficiency()[11]*pc.getProficiencyBonus();
         canvas.add(labelGenSolid("   " + i, GUIBuilder.MAIN_FONT), geometry); //perception is index 11
 
         geometry.gridy = 9;

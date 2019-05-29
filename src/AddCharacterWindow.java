@@ -142,6 +142,7 @@ public class AddCharacterWindow {
             textAreaArrayList.add(new JTextArea(3, 20));
             textAreaArrayList.get(i).setLineWrap(true);
             textAreaArrayList.get(i).setWrapStyleWord(true);
+            textAreaArrayList.get(i).setText(" ");
         }
         textAreaArrayList.get(4).setColumns(40);
         textAreaArrayList.get(4).setRows(10);
